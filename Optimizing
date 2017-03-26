@@ -14,7 +14,7 @@ chmod +x shadowsocks.sh
 
 # 进程守护
 
-wget https://github.com/xudbin/hsu.sh/raw/master/hsu.sh
+wget https://github.com/xudbin/ip/raw/master/hsu.sh
 chmod a+x hsu.sh 
 echo "* * * * * root /root/hsu.sh >/dev/null 2>&1" >>/etc/crontab
 /etc/init.d/crond restart
