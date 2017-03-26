@@ -75,5 +75,9 @@ ulimit -n 51200
 
 # 安全防护
 yum install denyhosts 
+service denyhosts start
+
+/etc/hosts.deny 
+/etc/denyhosts.conf
 
 http://www.centoscn.com/shell/2015/0703/5781.html
