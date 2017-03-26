@@ -81,3 +81,6 @@ service denyhosts start
 /etc/denyhosts.conf
 
 http://www.centoscn.com/shell/2015/0703/5781.html
+
+# 时区更改
+cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime  
