@@ -1,3 +1,29 @@
+#一键安装最新内核并开启 BBR 脚本
+
+wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh
+chmod +x bbr.sh
+./bbr.sh
+
+
+
+#python版一键安装
+
+wget --no-check-certificate -O shadowsocks.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks.sh
+chmod +x shadowsocks.sh
+./shadowsocks.sh 2>&1 | tee shadowsocks.log
+
+# 进程守护
+
+wget https://github.com/xudbin/hsu.sh/raw/master/hsu.sh
+chmod a+x hsu.sh 
+echo "* * * * * root /root/hsu.sh >/dev/null 2>&1" >>/etc/crontab
+/etc/init.d/crond restart
+
+
+
+
+
+#优化
 # ip
 # centos 6
 /etc/sysctl.conf
@@ -41,6 +67,13 @@ net.ipv4.tcp_wmem = 4096 65536 67108864
 # turn on path MTU discovery
 net.ipv4.tcp_mtu_probing = 1
 
+sysctl -p
 
 
 ulimit -n 51200
+
+
+# 安全防护
+yum install denyhosts 
+
+http://www.centoscn.com/shell/2015/0703/5781.html
