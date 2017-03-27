@@ -10,6 +10,6 @@ export PATH
 netstat -an | grep 256| grep ESTABLISHED | awk -F ':' '{print $2"\t"}' | awk '{print $2}'| awk '!a[$0]++'| sort | uniq | while read line
 
 do
-    sleep 0.3
+    sleep 0.7
     curl http://ip.cn/index.php?ip=$line;
 done
