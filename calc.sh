@@ -11,5 +11,5 @@ netstat -an | grep 256| grep ESTABLISHED | awk -F ':' '{print $2"\t"}' | awk '{p
 
 do
     sleep 0.3
-    curl --connect-timeout 1  http://ip.cn/index.php?ip=$line;
+    curl http://ip.cn/index.php?ip=$line;
 done
