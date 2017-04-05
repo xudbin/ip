@@ -78,6 +78,16 @@ vi /etc/security/limits.conf
 
 ulimit -n 51200
 
+#查看当前文件打开连接数
+#lsof（list open files）是一个列出当前系统打开文件的工具
+yum install lsof
+#一列为数量，第二列为进程号
+lsof -n|awk '{print $2}'|sort|uniq -c |sort -nr|more
+
+ps -ef|grep 进程号 
+
+
+
 
 # 安全防护
 yum install denyhosts 
