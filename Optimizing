@@ -70,6 +70,12 @@ net.ipv4.tcp_mtu_probing = 1
 sysctl -p
 
 
+vi /etc/security/limits.conf
+#添加
+* soft nofile 51200
+* hard nofile 51200
+
+
 ulimit -n 51200
 
 
