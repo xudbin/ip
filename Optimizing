@@ -96,6 +96,10 @@ service denyhosts start
 /etc/hosts.deny 
 /etc/denyhosts.conf
 
+删除包含Love的行
+sed -i '/Love/d' 1.txt
+
+
 http://www.centoscn.com/shell/2015/0703/5781.html
 
 # 时区更改
