@@ -105,3 +105,34 @@ http://www.centoscn.com/shell/2015/0703/5781.html
 # 时区更改
 cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime  
 service rsyslog restart
+
+
+屏蔽域名
+
+# 添加屏蔽规则
+iptables -I OUTPUT -m string --string "baidu.com" --algo bm -j DROP
+
+# 删除屏蔽规则，上面添加的代码是什么样，那么删除的代码就是把 -I 改成 -D 
+iptables -D OUTPUT -m string --string "baidu.com" --algo bm -j DROP
+
+
+II. 解释
+
+-I 是插入iptables规则；
+
+-D 是删除对应的iptables规则；
+
+-m string 是指定模块；
+
+–string “baidu.com” 是指定要匹配的字符串（域名）；
+
+–algo bm 是指定匹配字符串模式/算法；
+
+-j DROP 是指匹配到数据包后处理方式，这里是丢弃数据包。
+
+这个模块的作用就是匹配字符串，这个字符串可以是URL，也可以是普通文本，也可以是文件后缀，
+
+比如： .zip ，就会把包含 .zip 的数据库丢弃，这样就会无法下载 .zip 类型的文件了。
+
+其他的作用大家可以慢慢研究。https://www.ugeek.tk/linux-iptables
+
