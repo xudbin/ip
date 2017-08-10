@@ -1,3 +1,12 @@
+#卸载阿里云服务
+wget http://update.aegis.aliyun.com/download/quartz_uninstall.sh
+chmod +x quartz_uninstall.sh
+./quartz_uninstall.sh
+rm -f /usr/sbin/aliyun-service
+rm -rf /usr/local/aegis
+killall -9 aliyun-service > /dev/null 2>&1
+
+
 #一键安装最新内核并开启 BBR 脚本
 
 wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh
