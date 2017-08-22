@@ -1,0 +1,38 @@
+设置目录并安装
+
+yum install git -y
+cd /usr/local
+git clone https://github.com/blueset/ehForwarderBot.git
+cd ehForwarderBot
+
+进入该目录后再新建一个文件夹来存放日后运行EFB时所要处理的信息
+
+mkdir storage
+chmod +rw /usr/local/ehForwarderBot/storage
+
+
+安装Python3.6
+
+cd ~
+yum install -y https://centos7.iuscommunity.org/ius-release.rpm
+yum update -y
+yum install -y python36u python36u-libs python36u-devel python36u-pip python36u-setuptools
+which -a python3.6
+
+安装非Python依赖项
+FFmpeg 的安装比较繁琐：
+
+sudo rpm --import http://li.nux.ro/download/nux/RPM-GPG-KEY-nux.ro
+
+sudo rpm -Uvh https://dl.iuscommunity.org/pub/ius/stable/CentOS/6/x86_64/ius-release-1.0-15.ius.centos6.noarch.rpm
+
+yum install -y libwebp-devel file-devel ffmpeg
+
+
+
+后续配置
+
+cd /usr/local/ehForwarderBot/ 
+pip3.6 install -r requirements.txt
+cp config.sample.py config.py
+vi config.py
