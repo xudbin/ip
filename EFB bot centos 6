@@ -1,0 +1,46 @@
+
+
+
+https://dl.iuscommunity.org/pub/ius/stable/CentOS/6/x86_64/ius-release-1.0-15.ius.centos6.noarch.rpm
+
+
+http://www.jianshu.com/p/99a80aa9a2d0
+https://ellinia.me/how-to-deploy-ehforwarderbot-on-centos7/
+https://ehforwarderbot.readthedocs.io/en/latest/installation/
+https://zhuanlan.zhihu.com/p/25962058
+
+
+
+
+Error: Package: ffmpeg-libs-2.6.8-3.el7.nux.x86_64 (nux-dextop)
+           Requires: libhogweed.so.2()(64bit)
+Error: Package: libavdevice-2.6.8-3.el7.nux.x86_64 (nux-dextop)
+           Requires: libcdio_paranoia.so.1()(64bit)
+Error: Package: ffmpeg-libs-2.6.8-3.el7.nux.x86_64 (nux-dextop)
+           Requires: libgnutls.so.28(GNUTLS_1_4)(64bit)
+Error: Package: x265-libs-1.9-1.el7.nux.x86_64 (nux-dextop)
+           Requires: libm.so.6(GLIBC_2.15)(64bit)
+Error: Package: libavdevice-2.6.8-3.el7.nux.x86_64 (nux-dextop)
+           Requires: libcdio_cdda.so.1()(64bit)
+Error: Package: ffmpeg-libs-2.6.8-3.el7.nux.x86_64 (nux-dextop)
+           Requires: libgnutls.so.28(GNUTLS_3_0_0)(64bit)
+Error: Package: ffmpeg-libs-2.6.8-3.el7.nux.x86_64 (nux-dextop)
+           Requires: libgmp.so.10()(64bit)
+Error: Package: ffmpeg-libs-2.6.8-3.el7.nux.x86_64 (nux-dextop)
+           Requires: libgnutls.so.28()(64bit)
+Error: Package: xvidcore-1.3.2-5.el7.nux.x86_64 (nux-dextop)
+           Requires: libm.so.6(GLIBC_2.15)(64bit)
+Error: Package: ffmpeg-libs-2.6.8-3.el7.nux.x86_64 (nux-dextop)
+           Requires: liblzma.so.5(XZ_5.0)(64bit)
+Error: Package: ffmpeg-libs-2.6.8-3.el7.nux.x86_64 (nux-dextop)
+           Requires: libopenjpeg.so.1()(64bit)
+Error: Package: libavdevice-2.6.8-3.el7.nux.x86_64 (nux-dextop)
+           Requires: libcdio_cdda.so.1(CDIO_CDDA_1)(64bit)
+Error: Package: ffmpeg-libs-2.6.8-3.el7.nux.x86_64 (nux-dextop)
+           Requires: liblzma.so.5()(64bit)
+Error: Package: ffmpeg-libs-2.6.8-3.el7.nux.x86_64 (nux-dextop)
+           Requires: libass.so.5()(64bit)
+Error: Package: libavdevice-2.6.8-3.el7.nux.x86_64 (nux-dextop)
+           Requires: libcdio_paranoia.so.1(CDIO_PARANOIA_1)(64bit)
+ You could try using --skip-broken to work around the problem
+ You could try running: rpm -Va --nofiles --nodigest
