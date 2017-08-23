@@ -3,6 +3,13 @@ echo '/usr/local/lib' >> /etc/ld.so.conf.d/local.conf
 #更新缓存
 ldconfig
 
+vi /etc/ld.so.conf
+
+添加 /usr/local/lib
+
+保存后执行 ldconfig
+
+
 
 #安装autoconf
 
