@@ -1,4 +1,15 @@
 
+添加任意一条防火墙规则，命令如下：
+iptables -P OUTPUT ACCEPT
+保存 iptables 策略：
+service iptables save
+
+
+执行启动 iptables 的命令启动：
+service iptables start
+
+
+
 首先我们要打开服务器的转发功能:vi /etc/sysctl.conf
 
 把net.ipv4.ip_forward= 0修改成net.ipv4.ip_forward= 1
