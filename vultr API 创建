@@ -1,0 +1,3 @@
+#创建东京2.5刀  centos64 
+
+curl -H 'API-Key:example' https://api.vultr.com/v1/server/create --data 'DCID=25' --data 'VPSPLANID=200' --data 'OSID=127'
