@@ -31,3 +31,13 @@ java -Xmx1024M -Xms1024M -jar minecraft_server.1.12.1.jar nogui
 
 安全组添加端口：25565
 
+
+后台运行
+yum install screen
+screen -S mc
+java -Xmx1024M -Xms1024M -jar minecraft_server.1.12.1.jar nogui
+ctrl+a+d 退出
+返回 screen -r mc
+
+
+
