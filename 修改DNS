@@ -1,0 +1,22 @@
+
+CentOS 6.6 永久修改DNS地址的方法
+
+
+1、配置ip地址文件 /etc/sysconfig/network-scripts/ifcfg-eth0
+
+添加一行
+
+DNS1=8.8.8.8    #手动添加一个dns地址；
+DNS配置文件/etc/resolv.conf 的地址会自动匹配手动添加的地址；重启网卡后不会清除；
+
+2、手动添加dns地址    DNS配置文件 /etc/resolv.conf
+
+
+nameserver 192.168.1.17
+配置ip地址文件 /etc/sysconfig/network-scripts/ifcfg-eth0
+添加
+PEERDNS=no    #添加后不会去打扰 /etc/resolv.conf 文件
+
+DHCP环境下，在/etc/resolv.conf 手动添加dns地址后，重启网卡，会自动清除；添加到/etc/sysconfig/network-scripts/ifcfg-eth0的dns地址不会清除；
+
+静态配置IP的环境下，/etc/resolv.conf 手动添加dns地址，重启后不会清除；
