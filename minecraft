@@ -39,5 +39,36 @@ java -Xmx1024M -Xms1024M -jar minecraft_server.1.12.1.jar nogui
 ctrl+a+d 退出
 返回 screen -r mc
 
+=====================Forge服务器搭建===========================================
+首先你得确认你的服务器是否已经有了SWAP了，运行一下
+free -m
+如果SWAP那一栏全都是0，说明就是没有配置了，接下来就是配置过程，本例是以文件作为交换分区：
+
+dd if=/dev/zero of=/root/swapfile bs=1M count=2048
+mkswap /root/swapfile
+swapon /root/swapfile
+
+上面三句话分别是创建文件（耗时较长），格式化文件，启用SWAP文件。运行完后，你服务器就会多出2GB的SWAP了。但是重新启动服务器后SWAP并不会自动启用，所以需要在文件/etc/fstab末尾添加一行：
+
+/root/swapfile swap swap defaults 0 0
+
+以实现开机自动启用。
+#安装原版mc 1.11.2
+ wget https://s3.amazonaws.com/Minecraft.Download/versions/1.11.2/minecraft_server.1.11.2.jar
+ java -Xmx1024M -Xms1024M -jar minecraft_server.1.11.2.jar nogui
+ 
+
+#安装forge
+wget http://files.minecraftforge.net/maven/net/minecraftforge/forge/1.11.2-13.20.1.2386/forge-1.11.2-13.20.1.2386-installer.jar
+
+java -Xmx1600M -Xms1600M -jar forge-1.11.2-13.20.1.2386-installer.jar -installServer
+
+
+#启动forge
+
+java -Xmx1600M -Xms1600M -jar forge-1.11.2-13.20.1.2386-universal.jar nogui
+
+
+
 
 
