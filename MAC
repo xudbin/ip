@@ -1,0 +1,16 @@
+安装pip 
+sudo easy_install pip 
+
+
+
+
+安装 mtr 包  mtr-packet 错误
+解决方法 添加 路径 
+export PATH=/usr/local/sbin:$PATH
+
+echo $PATH
+
+
+
+
+sudo -s 提权
