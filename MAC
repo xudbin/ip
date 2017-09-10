@@ -10,7 +10,22 @@ export PATH=/usr/local/sbin:$PATH
 
 echo $PATH
 
+查看端口占用：
+lsof -i :1080
 
 
 
 sudo -s 提权
+
+
+前两步很简单，可是有人就纳闷了安装好了不知道怎么用，其实可以用sslocal -help来查看帮助就知道了。
+
+sslocal -s ingressbj.com -p 701  -l 1080 -k keepsilent -t 600 -m aes-256-cfb
+
+-s表示服务IP, -p指的是服务端的端口，-l是本地端口默认是1080（可以替换成任何端口号，只需保证端口不冲突）, -k 是密码（要加""）, -t超时默认300,-m是加密方法默认aes-256-cfb，
+
+可以简单的写为：sslocal -s ip  -p  port -k "password"    #用-s -p -k这三个参数就好，其他的默认将服务端的加密方法设为aes-256-cfb。然后就可以启动代理。
+
+现在试试打开你的终端，输入sslocal -s 服务端IP  -p  1080 -k "密码" 回车
+
+可以将以上命令写入一个sh文件中，以后每次运行一下脚本就可以
