@@ -1,0 +1,55 @@
+阿里云和腾讯云等内网安装DirectAdmin的方法
+
+作者: admin 时间: 2017-09-09 分类: Linux,Server,DirectAdmin
+阿里云和腾讯云因为默认设置的是内网IP, 在安装DirectAdmin的时候有很多问题, 网上虽然有些方法, 不过都只考虑到安装的时候, 但是DirectAdmin每个月还需要更新一次授权, 如果没有设置好, 会导致授权无法更新.
+
+首先查看服务器网卡
+
+/sbin/ifconfig
+如果没有显示公网ip地址, 那么我们需要手动设置一个网卡, 如下设置新网卡名称为eth0:0
+
+cd /etc/sysconfig/network-scripts
+vi ifcfg-eth0:0
+编辑下面的信息, 把IP地址修改为您的公网IP
+
+DEVICE=eth0:0
+BOOTPROTO=none
+ONPARENT=yes
+IPADDR=47.47.47.47
+NETMASK=255.255.255.0
+ONBOOT=yes
+设置NAT转发：
+如公网IP地址是:47.47.47.47, 内网IP地址是:172.21.21.21, 请修改为自己的IP
+
+iptables -t nat -A POSTROUTING -s 47.47.47.47 -j SNAT --to-source=172.21.21.21
+保存防火墙规则
+
+service iptables save
+再重启服务器
+
+reboot
+重启后查看网卡, 看看公网IP有没有设置上
+
+/sbin/ifconfig
+测试一下
+
+curl --interface eth0:0 -v https://www.directadmin.com
+如果正常就开始安装DirectAdmin, 安装方法参考这里
+https://blog.imgchr.com/archives/16/
+
+安装完成后还需要去DirectAdmin后台设置
+IP管理--添加IP
+把内网IP(如172.21.21.21)添加进去, 掩码可以去/sbin/ifconfig查看
+添加完成后返回IP关联, 点击公网IP(如:47.47.47.47), 选择下面的内网IP(如172.21.21.21), 取消添加到DNS, 选择添加到Apache后点击关联.
+
+再编辑DirectAdmin配置文件, 添加LAN IP(内网IP)
+
+vi /usr/local/directadmin/conf/directadmin.conf
+
+lan_ip=172.21.21.21
+然后重启服务器
+
+reboot
+参考链接
+https://www.directadmin.com/lan.php
+https://help.directadmin.com/item.php?id=418
