@@ -3,8 +3,16 @@ sudo easy_install pip
 
 
 
+安装文件在/usr/local/sbin
+运行mtr出现提示
+
+-bash: mtr: command not found
+解决办法:
+
+alias mtr=/usr/local/sbin/mtr
 
 安装 mtr 包  mtr-packet 错误
+
 解决方法 添加 路径 
 export PATH=/usr/local/sbin:$PATH
 
