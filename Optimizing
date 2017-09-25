@@ -1,3 +1,9 @@
+#一键测速
+wget -O speedtest-cli https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py
+chmod +x speedtest-cli
+./speedtest-cli  or  python speedtest-cli
+
+
 #修改主机名
 vi /etc/sysconfig/network
 reboot
