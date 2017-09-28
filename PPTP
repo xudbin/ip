@@ -1,0 +1,7 @@
+wget --no-check-certificate https://raw.githubusercontent.com/teddysun/across/master/pptp.sh
+chmod +x pptp.sh
+./pptp.sh
+
+vi /etc/sysconfig/iptables
+iptables -t nat -A POSTROUTING -s 192.168.8.0/24 -j SNAT --to-source ${IP}
+service iptables restart
