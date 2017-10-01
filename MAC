@@ -1,6 +1,7 @@
 安装pip 
 sudo easy_install pip 
 
+sudo -s 
 
 
 安装文件在/usr/local/sbin
