@@ -9,6 +9,7 @@ sudo -s
 
 -bash: mtr: command not found
 解决办法:
+vi ~/.bashrc
 
 alias mtr=/usr/local/sbin/mtr
 
