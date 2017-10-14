@@ -1,0 +1,54 @@
+Linux
+GAE类
+XX-Net
+自动扫 ip 的 goagent，外号“叉烧狗”加入 h2 后性能更上一层楼
+https://github.com/XX-net/XX-Net
+XX-Net Android版
+https://github.com/XX-net/xxnet-android/releases
+GoProxy
+社长最新 golang 版的 goagent，外号“狗屁”性能不俗，目前维护积极
+https://github.com/phuslu/goproxy
+XX-Mini
+精简后的叉烧狗，Linux 的首选，安装包就一两百kb，xyuanmu 的打包水平可见一般，外号“狗崽子”
+https://github.com/xyuanmu/XX-Mini
+隧道类
+Shadowsocks 这个不需要多讲了，应该是面前最受欢迎的代理方式。ios 版本因为众所周知的原因被下架，可用 shadowrocket， wingy 替代
+https://github.com/shadowsocks
+Shadowsocks-Windows版
+https://github.com/shadowsocks/shadowsocks-windows/releases
+Shadowsocks-Android版
+https://github.com/shadowsocks/shadowsocks-android/releases
+V2ray
+https://github.com/v2ray/v2ray-core
+最近开发活跃，作者自带的服务器是可用的
+GoGo
+外号“二狗”，是一个基于 Paas 平台的代理工具，同时支持 SOCKS5 和 HTTP 两种代理协议，面前自带的免费 HEROKU 空间，速度还是可以接受的，官网已经被GFW墙了
+http://www.gogotunnel.com/
+X-Tunnel ， socks5 通过 gae 转发，有效防止服务端 ip 被封，x大的衍生性作品
+Gost TLS tunnel
+https://github.com/ginuerzh/gost
+隧道类太多了，不一一列举
+Lantern
+该说说 Lantern 了，这货以前速度很饱满，最近痿了，今天来说说 Lantern 其他功效
+首先 Lantern 支持 https 代理，这样一特性让它可以成为 tor 的前置，而 gae 类是不行的。然后兼容性可能也要胜过 gae ，几乎没有打不开的网站，上传下载更不是问题。
+鸡肋的是它自带的 pac ，和启动弹窗，稍慢的速度
+https://github.com/getlantern/lantern
+Lantern-Windows版
+https://github.com/getlantern/lantern/releases/download/3.6.3/update_windows_386.bz2
+Lantern-Android版
+https://s3.amazonaws.com/lantern/lantern-installer-beta.apk
+Tor
+最后还是上 Tor 吧
+最近更新了6.5版， tor 的用法呈多样化，可以用官方浏览器版，可以提取 tor 文件自己编译一下，然后配合 torrc 文件来使用。
+关于自带网桥目前就 obfs4 可用，其他的 obfs3，2基本被封杀殆尽。一般推荐前置， lantern 或者 shadowsocks
+下载：https://dist.torproject.org/torbrowser/6.5.1/torbrowser-install-6.5.1_ar.exe
+获取网桥：https://bridges.torproject.org/options
+自编译版：https://github.com/torproject/tor
+IP扫描工具
+首先是 xyuanmu 兄的多功能 ip 查找工具，集 dig ，扫描，格式转换于一身，被人们低估的工具，确实很强大
+Windows和Linux双平台：https://github.com/xyuanmu/checkiptools
+再就是 kisesy 兄的魔改 MMF ，这个确实魔性，一致好评
+Windows下载：https://github.com/phuslu/goproxy/files/273808/Release.tar.gz
+
+
+https://yeahwu.github.io/2017/03/25/%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91%E5%B7%A5%E5%85%B7%E9%9B%86%E5%90%88/
