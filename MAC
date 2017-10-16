@@ -20,6 +20,19 @@ export PATH=/usr/local/sbin:$PATH
 
 echo $PATH
 
+#登录ssh 
+cd Downloads
+
+ssh -i key.pem root@192.168.1.1
+
+ssh-add -k key.pem
+
+
+
+
+
+
+
 查看端口占用：
 lsof -i :1080
 
