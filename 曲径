@@ -1,0 +1,56 @@
+# ip
+
+
+http://www.jianshu.com/p/22a6d237bcf2
+
+https://my.oschina.net/linuxv/blog/355955
+
+       apt-get install golang
+        wget https://github.com/getqujing/qtunnel/archive/master.zip
+        unzip master.zip && cd qtunnel*
+        make && sudo cp qtunnel /usr/bin/执行qtunnel -h如看到如下信息则安装成功：Usage of qtunnel:
+
+  -backend="127.0.0.1:6400": host:port of the backend
+  -clientmode=false: if running at client mode
+  -crypto="rc4": encryption method
+  -listen=":9001": host:port qtunnel listen on
+  -logto="stdout": stdout or syslog
+  -secret="secret": password used to encrypt the data安装nginx或者squid等代理：apt-get install nginx 或者 apt-get install squid3配置nginx为正向代理：server {
+    listen 127.0.0.1:3128;
+    server_name localhost;
+    resolver 8.8.8.8;
+    location / {
+        set $upstream_host $host;
+        if ($request_uri ~ "^/announce.*") {
+            return 403;
+        }
+        if ($request_uri ~ "^.*torrent.*") {
+            return 403;
+        }
+        proxy_set_header Host $upstream_host;
+        proxy_pass http://$upstream_host;
+        proxy_buffers 8 32k;
+        proxy_buffering off;
+   }
+}
+
+执行以下命令创建server端，端口为56789(可自行设定)，指定加密类型为aes-256-cfb加密，传输密钥自行设定。
+
+        qtunnel -listen=:56789 -secret="指定密钥" -crypto=aes256cfb -backend=127.0.0.1:3128 -clientmode=false
+
+至此服务端创建完毕。
+
+
+
+客户端以我本地笔记本为例：
+        brew install go
+        wget https://github.com/getqujing/qtunnel/archive/master.zip
+        unzip master.zip && cd qtunnel*
+        make && sudo cp qtunnel /usr/bin/
+
+执行以下命令创建client端，配置信息请和server一致：
+   
+	qtunnel -listen=127.0.0.1:1081 -secret="指定密钥" -crypto=aes256cfb -backend=你VPS公网IP:56789 -clientmode=true
+
+然后设定本地浏览器的HTTP代理为127.0.0.1 1081即可愉快的观看U2B视频、调戏FB上的好基友。
+配合Chrome上的SwitchySharp + gfwlist便可以智能翻X了。
