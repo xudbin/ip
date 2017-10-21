@@ -3,6 +3,10 @@ wget -O speedtest-cli https://raw.githubusercontent.com/sivel/speedtest-cli/mast
 chmod +x speedtest-cli
 ./speedtest-cli  or  python speedtest-cli
 
+#京东云卸载
+cd /etc/jcloudhids.py
+./uninstall.py
+
 
 #修改主机名
 vi /etc/sysconfig/network
