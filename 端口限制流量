@@ -1,0 +1,14 @@
+#一直以来都是用下面这样的命令，端口 2G 流量后停止 
+-A OUTPUT -p tcp --sport 3990 -m quota --quota 2000000000 -j ACCEPT 
+-A OUTPUT -p tcp --sport 3990 -j DROP 
+
+
+
+#限制端口的TCP和UDP 流量 为 2G
+
+iptables -N TRAFFIC_QUOTA 
+iptables -A OUTPUT -p tcp --sport 3990 -g TRAFFIC_QUOTA 
+iptables -A OUTPUT -p udp --sport 3990 -g TRAFFIC_QUOTA 
+
+iptables -A TRAFFIC_QUOTA -m quota --quota 2000000000 -j ACCEPT 
+iptables -A TRAFFIC_QUOTA -j DROP 
