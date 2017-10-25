@@ -1,0 +1,13 @@
+
+
+
+#方法一:
+
+:%s/well/good/g（等同于 :g/well/s//good/g） 替换每一行中所有 well 为 good
+
+
+#方法二:
+
+替换文件中所有01为Ab
+
+sed 's/01/Ab/g' test_sed
