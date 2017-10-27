@@ -37,7 +37,7 @@ iptables -t nat -A POSTROUTING -d 1.1.1.1 -p udp -m udp --dport 30000 -j SNAT --
 service iptables save
 service iptables restart
 
-如果你感觉自己特聪明，已经身近百战了，你还能直接编辑iptables文件
+直接编辑iptables文件
 
 vi /etc/sysconfig/iptables
 然后重启iptables service iptables restart
