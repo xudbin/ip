@@ -1,4 +1,8 @@
 
+#vultr 
+需要禁用 #-A FORWARD -j REJECT --reject-with icmp-host-prohibited
+
+
 添加任意一条防火墙规则，命令如下：
 iptables -P OUTPUT ACCEPT
 保存 iptables 策略：
