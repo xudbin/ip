@@ -30,6 +30,8 @@ iptables -t nat -A PREROUTING -p udp -m udp --dport 10000 -j DNAT --to-destinati
 iptables -t nat -A POSTROUTING -d 1.1.1.1 -p tcp -m tcp --dport 30000 -j SNAT --to-source 2.2.2.2
 iptables -t nat -A POSTROUTING -d 1.1.1.1 -p udp -m udp --dport 30000 -j SNAT --to-source 2.2.2.2
 
+填写地址时2.2.2.2 10000   代替  1.1.1.1:30000
+
 最后别忘了保存规则和重启iptables
 service iptables save
 service iptables restart
