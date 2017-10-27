@@ -1,4 +1,5 @@
 
+============
 #vultr 
 需要禁用 #-A FORWARD -j REJECT --reject-with icmp-host-prohibited
 
