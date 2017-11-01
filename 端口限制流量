@@ -12,3 +12,28 @@ iptables -A OUTPUT -p udp --sport 3990 -g TRAFFIC_QUOTA
 
 iptables -A TRAFFIC_QUOTA -m quota --quota 2000000000 -j ACCEPT 
 iptables -A TRAFFIC_QUOTA -j DROP 
+
+
+输入监控
+iptables -A INPUT -p tcp --dport 8080
+
+输出监控
+iptables -A OUTPUT -p tcp --sport 8080
+
+查看统计
+iptables -L -v -n -x
+
+1、重置所有输入端口
+
+Iptable -Z INPUT
+2、重置所有输出端口
+
+Iptable -Z OUTPUT
+
+
+1、移除输入端口
+
+iptables -D INPUT -p tcp --dport 8080
+2、移除输出端口
+
+iptables -D OUTPUT -p tcp --sport 8080
