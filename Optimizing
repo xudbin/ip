@@ -32,6 +32,22 @@ chmod +x bbr.sh
 wget --no-check-certificate -O shadowsocks-libev.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-libev.sh
 chmod +x shadowsocks-libev.sh
 ./shadowsocks-libev.sh 2>&1 | tee shadowsocks-libev.log
+========================
+#开启日志
+以四合一版的安装为例，修改启动脚本 /etc/init.d/shadowsocks-libev，找到下面这一行
+$DAEMON -u -c $CONF -f $PID_FILE
+修改为
+$DAEMON -uv -c $CONF -f $PID_FILE
+然后保存该启动脚本，并执行以下命令：
+/etc/init.d/shadowsocks-libev stop
+/etc/init.d/shadowsocks-libev start
+正常启动后， log 就会输出到 /var/log/messages 文件里了
+
+yum install rng-tools.x86_64
+rngd -r /dev/urandom
+
+
+
 
 
 #python版一键安装
