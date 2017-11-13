@@ -1,5 +1,8 @@
 
 ============
+#iptable 开机启动
+chkconfig iptables on
+
 # vultr 
 需要禁用 #-A FORWARD -j REJECT --reject-with icmp-host-prohibited
 
