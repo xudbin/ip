@@ -148,6 +148,48 @@ service denyhosts start
 /etc/hosts.deny 
 /etc/denyhosts.conf
 
+#安全防火 fail2ban
+yum install epel-release
+yum install fail2ban
+systemctl enable fail2ban
+
+vim /etc/fail2ban/jail.local
+----------------------------
+[DEFAULT]
+# 禁止一个IP一小时
+bantime = 360000
+findtime = 300
+maxretry = 3
+ 
+# 覆写 /etc/fail2ban/jail.d/00-firewalld.conf:
+banaction = iptables-multiport
+ 
+[sshd]
+enabled = true
+----------------------------
+
+启用fail2ban并设为开机自启
+
+systemctl enable fail2ban
+systemctl start fail2ban
+
+fail2ban常用命令
+
+查看SSH服务监护状态，能看到当前被禁IP。
+
+fail2ban-client status sshd
+在SSH监护服务忽略IP列表（白名单）中添加IP 192.168.111.111
+
+fail2ban-client set sshd addignoreip 192.168.111.111
+在SSH监护服务忽略IP列表（白名单）中删除IP 192.168.111.111
+
+fail2ban-client set sshd delignoreip 192.168.111.111
+查看fail2ban日志
+
+tail /var/log/fail2ban.log
+
+==========================================
+
 删除包含Love的行
 sed -i '/Love/d' 1.txt
 
