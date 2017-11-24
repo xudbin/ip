@@ -68,6 +68,9 @@ chmod a+x hsu.sh
 echo "* * * * * root /root/hsu.sh >/dev/null 2>&1" >>/etc/crontab
 /etc/init.d/crond restart
 
+#centos 7 加载任务,使之生效
+crontab /etc/crontab
+
 
 
 
