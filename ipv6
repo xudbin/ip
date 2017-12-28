@@ -1,0 +1,155 @@
+
+说明：
+因种种原因，需要开启阿里云服务器的ipv6。系统为centos 6.6 64bit
+
+具体：
+1. 修改disable_ipv6.conf，不同的系统命名会有些差别
+
+# cp /etc/modprobe.d/disable_ipv6.conf /data/guotest/ipv6/  ##先备份下原始配置，这是个好习惯！
+# vim /etc/modprobe.d/disable_ipv6.conf   ##注释alias ipv6 off及修改options ipv6 disable为0
+修改前
+alias net-pf-10 off
+alias ipv6 off
+options ipv6 disable=1
+
+修改后
+alias net-pf-10 off
+#alias ipv6 off
+options ipv6 disable=0
+
+# cp /etc/sysconfig/network /data/guotest/ipv6/
+# vim /etc/sysconfig/network    ##修改NETWORKING_IPV6为yes
+修改前
+NETWORKING=yes
+HOSTNAME=coolnull
+NETWORKING_IPV6=no
+PEERNTP=no
+GATEWAY=*.*.*.*
+
+修改后
+NETWORKING=yes
+HOSTNAME=coolnull
+NETWORKING_IPV6=yes
+PEERNTP=no
+GATEWAY=*.*.*.*
+ 
+2. 修改/etc/sysctl.conf ，把下面三项设置都改为0
+
+修改前
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+
+修改后
+net.ipv6.conf.all.disable_ipv6 = 0
+net.ipv6.conf.default.disable_ipv6 = 0
+net.ipv6.conf.lo.disable_ipv6 = 0
+ 
+3. 至此ipv6的服务器端支持已经完成，重启服务器测试是否支持ipv6，重启后
+
+# lsmod | grep ipv6   如果有输出则已经支持ipv6
+ipv6                  318183  23 sit
+ 
+4. 查看ipv6的信息，有看到输出就可以
+
+# ifconfig|grep -i inet6
+          inet6 addr: fe80::x:x:x:x/64 Scope:Link
+          inet6 addr: fe80::x:x:x:x/64 Scope:Link
+          inet6 addr: x:x:x:x::2/64 Scope:Global
+          inet6 addr: fe80::x:x/128 Scope:Link
+          inet6 addr: ::1/128 Scope:Host
+
+
+说明：
+上一篇阿里云centos开启ipv6支持已经开启了云服务器的ipv6支持，现在再添加下ipv6隧道，就可以通过ipv6上网了
+阿里云ecs，试了，无论专用网络还是经典网络都可以通过这个实现ipv6。
+
+ipv6配置好了以后，可以通过这台访问到其它ipv6服务器。但其它地方要访问这台的ipv6服务，还需要阿里云安全组那边，将所有端口都放行，不然无法访问。全部端口都放行不太安全，阿里云安全组那边也没找到专门针对ipv6(6in4实现)放行的安全组规则。官方那边建议让开启本地服务器的iptables。具体可以看附录1.阿里云ecs开启iptables放行6in4流量。
+
+具体：
+1. 注册Tunnel broker
+https://www.tunnelbroker.net/
+注册很容易，就不讲了，注册需要邮箱验证，，gmail、163能收得到认证邮件，qq还是一样收不到
+
+2. 创建通道“Create Regular Tunnel”
+填写云服务器ip以及选择默认的隧道节点，点击Create Tunnel创建。填写ip都，如果出现“IP is a potential tunnel endpoint.”则证明可以添加ipv6隧道，一般隧道节点系统已经默认分配，可以手动选择，大家可以在自己的云服务器上分别ping一下这些ip，选时延低的。
+阿里云centos添加ipv6隧道
+
+3. 创建ipv6隧道及路由
+到下一页面切换到Example configurations选项卡，如果你的VPS是centOS/Debian这些常见Linux的话，下拉菜单选择Linux-route2，出现了设置的命令，复制到自己的云服务器上运行。
+阿里云centos添加ipv6隧道
+
+如果执行命令失败，可以复制以下命令，Server IPv4 Address Client IPv4 Address Server IPv6 Address等按IPv6 Tunnel那页对应的填写
+
+# modprobe ipv6
+# ip tunnel add he-ipv6 mode sit remote <Server IPv4 Address> local <Client IPv4 Address> ttl 255
+# ip link set he-ipv6 up
+# ip addr add <Client IPv6 Address> dev he-ipv6
+# ip -6 route add ::/0 dev he-ipv6
+# ip -f inet6 addr
+ 
+这里有个要注意的地方，Client IPv4 Address 该填的是ECS内网的IP地址，而不是公网的IP地址。具体HE.net tunnel broker里面有这样一句话：
+NOTE: When behind a firewall appliance that passes protocol 41, use the IPv4 address you get from your appliance’s DHCP service instead of the IPv4 endpoint you provided to our broker.
+
+刚开始Client IPV4 Address我填的是ECS的公网地址，所以一直无法ping6通过。这里我用的阿里云专用网络的ECS，所以刚开始失败我还以为专用网络或安全组（防火墙）问题，后来发现不是。
+
+4. 测试ipv6
+
+# ifconfig he-ipv6    ##可以看到已经获取ipv6地址及建立了he-ipv6隧道
+he-ipv6   Link encap:IPv6-in-IPv4  
+          inet6 addr: x:x:x:x::x/64 Scope:Global
+          inet6 addr: x::x:x/128 Scope:Link
+          UP POINTOPOINT RUNNING NOARP  MTU:1480  Metric:1
+          RX packets:252535 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:167086 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:248945037 (237.4 MiB)  TX bytes:22166230 (21.1 MiB)
+ 
+
+# ping6 ipv6.google.com  ##ping6域名会提示unknown host，这是因为当前系统不支持ipv6解析，只要添加下ipv6的dns服务器就可以了，
+unknown host
+
+# ping6 -c 5 2001:4860:4860::8888    ###直接ping6 ipv6是正常的
+PING 2001:4860:4860::8888(2001:4860:4860::8888) 56 data bytes
+64 bytes from 2001:4860:4860::8888: icmp_seq=1 ttl=61 time=3.52 ms
+64 bytes from 2001:4860:4860::8888: icmp_seq=2 ttl=61 time=3.62 ms
+64 bytes from 2001:4860:4860::8888: icmp_seq=3 ttl=61 time=3.95 ms
+64 bytes from 2001:4860:4860::8888: icmp_seq=4 ttl=61 time=3.65 ms
+64 bytes from 2001:4860:4860::8888: icmp_seq=5 ttl=61 time=3.70 ms
+
+--- 2001:4860:4860::8888 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4009ms
+rtt min/avg/max/mdev = 3.525/3.692/3.954/0.157 ms
+ 
+5.添加ipv6的dns服务器，在最后添加nameserver 2001:4860:4860::8888,nameserver 2001:4860:4860::8844谷歌的ipv6 dns服务器
+
+# vim /etc/resolv.conf
+options timeout:1 attempts:1 rotate
+nameserver x.x.x.x
+nameserver x.x.x.x
+nameserver 2001:4860:4860::8888
+nameserver 2001:4860:4860::8844
+ 
+这时再ping6就正常了
+
+# ping6 -c 5 ipv6.google.com
+PING ipv6.google.com(tsa03s01-in-x0e.1e100.net) 56 data bytes
+64 bytes from tsa03s01-in-x0e.1e100.net: icmp_seq=1 ttl=55 time=25.5 ms
+64 bytes from tsa03s01-in-x0e.1e100.net: icmp_seq=2 ttl=55 time=25.5 ms
+64 bytes from tsa03s01-in-x0e.1e100.net: icmp_seq=3 ttl=55 time=33.1 ms
+64 bytes from tsa03s01-in-x0e.1e100.net: icmp_seq=4 ttl=55 time=25.5 ms
+64 bytes from tsa03s01-in-x0e.1e100.net: icmp_seq=5 ttl=55 time=25.4 ms
+
+--- ipv6.google.com ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4031ms
+rtt min/avg/max/mdev = 25.473/27.040/33.180/3.073 ms
+ 
+附录：
+附录1.阿里云ecs开启iptables放行6in4流量。
+配置的IPv6地址是属于6in4的IPv6隧道地址，当使用6to4或6in4时，你传输的并不是ipv6包，其实是特殊的ipv4包携带ipv6数据。这些包使用的ipv4的protocol 41协议，就如RFC 2473定义的。
+When using 6to4, you do not transmit IPv6 packets. Instead, special IPv4 packets are wrapped around IPv6 payloads. These packets have IPv4 protocol 41, as defined by RFC 2473.
+
+所以系统防火墙那边要做的，就是如下：
+
+iptables -t filter -I INPUT -p 41 -j ACCEPT
+iptables -t filter -I OUTPUT -p 41 -j ACCEPT
