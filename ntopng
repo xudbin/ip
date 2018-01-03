@@ -3,7 +3,7 @@
 
 https://github.com/ntop/ntopng/blob/dev/doc/README.compilation
 
-yum groupinstall 'Development Tools'
+yum groupinstall "Development tools"
 
 yum install tcl
 
