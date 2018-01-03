@@ -1,0 +1,19 @@
+
+#centos 6
+
+https://github.com/ntop/ntopng/blob/dev/doc/README.compilation
+
+yum groupinstall 'Development Tools'
+
+yum install tcl
+
+yum install libpcap libpcap-devel
+
+yum install mysql-devel
+
+yum install redis.x86_64
+
+yum install libxml2-devel.x86_64
+
+yum install git autoconf automake autogen bison flex libpcap-devel GeoIP-devel hiredis-devel redis glib2-devel libxml2-devel sqlite-devel gcc-c++ libtool wget libcurl-devel pango-devel cairo-devel libpng-devel mysql-devel libnetfilter_queue-devel zlib-devel which libcap-devel
+
