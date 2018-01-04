@@ -17,3 +17,17 @@ yum install libxml2-devel.x86_64
 
 yum install git autoconf automake autogen bison flex libpcap-devel GeoIP-devel hiredis-devel redis glib2-devel libxml2-devel sqlite-devel gcc-c++ libtool wget libcurl-devel pango-devel cairo-devel libpng-devel mysql-devel libnetfilter_queue-devel zlib-devel which libcap-devel
 
+
+git clone https://github.com/ntop/ntopng.git
+cd ntopng
+./autogen.sh
+./configure
+make
+make install
+
+service  redis restart
+
+./ntopng
+
+
+公网IP:3000  访问
