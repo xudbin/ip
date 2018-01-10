@@ -1,0 +1,28 @@
+
+
+在想想怎么从网页获取一个post的cURL（bash）
+
+        很幸运地发现，当我点击billing时会有一个post的请求，保存下来，对比一下
+
+
+
+mid的2改为6，req后面那段先全替换，再改号码
+
+        新的代码中，原来是这样的，
+
+--data 'sid=3&mid=2&req=%5Bnull%2Ctrue%5D&_rnr_se=zmhcv6I6r0kAtTn1I9WJE%2BoF4Fg%3D' 
+
+        替换成
+
+--data 'sid=3&mid=6&req=%5Bnull%2C%22%2B16572342344%22%2Ctrue%2C%22%22%5D&_rnr_se=zmhcv6I6r0kAtTn1I9WJE%2BoF4Fg%3D' 
+
+        放进刷Google Voice的脚本就正常执行了
+        
+        
+        
+        
+        
+        
+        
+        
+        
