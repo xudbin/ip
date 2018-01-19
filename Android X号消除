@@ -1,9 +1,15 @@
 #消除X号
 adb shell  #检测设备
+
 adb shell "settings put global captive_portal_https_url https://www.google.cn/generate_204"
+adb shell "settings put global captive_portal_http_url http://www.google.cn/generate_204"
+
 
 
 
 #恢复
+
 adb shell "settings delete global captive_portal_server"
 adb shell "settings delete global captive_portal_https_url"
+adb shell "settings delete global captive_portal_http_url"
+adb shell "settings put global captive_portal_detection_enabled 1"
