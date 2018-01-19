@@ -13,3 +13,10 @@ adb shell "settings delete global captive_portal_server"
 adb shell "settings delete global captive_portal_https_url"
 adb shell "settings delete global captive_portal_http_url"
 adb shell "settings put global captive_portal_detection_enabled 1"
+
+备选方案：完全关闭网络检查服务
+如果你想一劳永逸，可以直接使用 ADB 命令关闭系统网络检查服务：
+
+adb shell settings put global captive_portal_detection_enabled 0
+
+需要说明的是，当遇到需要使用 portal 验证的网络（例如星巴克的免费无线网络）可能会无法连接。
