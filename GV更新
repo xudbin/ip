@@ -14,7 +14,7 @@ mid的2改为6，req后面那段先全替换，再改号码
 
         替换成
 
---data 'sid=3&mid=6&req=%5Bnull%2C%22%2B16572342344%22%2Ctrue%2C%22%22%5D&_rnr_se=zmhcv6I6r0kAtTn1I9WJE%2BoF4Fg%3D' 
+--data 'sid=3&mid=6&req=%5Bnull%2C%22%2B15706611068%22%2Ctrue%2C%22%22%5D&_rnr_se=zmhcv6I6r0kAtTn1I9WJE%2BoF4Fg%3D' 
 
         放进刷Google Voice的脚本就正常执行了
         
