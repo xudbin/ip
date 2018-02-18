@@ -17,6 +17,7 @@ chmod +x quartz_uninstall.sh
 ./quartz_uninstall.sh
 rm -f /usr/sbin/aliyun-service
 rm -rf /usr/local/aegis
+rm -rf /usr/sbin/gshelld
 killall -9 aliyun-service > /dev/null 2>&1
 
 
