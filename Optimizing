@@ -72,10 +72,6 @@ echo "* * * * * root /root/hsu.sh >/dev/null 2>&1" >>/etc/crontab
 #centos 7 加载任务,使之生效
 crontab /etc/crontab
 
-
-
-
-
 #优化
 # ip
 # centos 6
@@ -138,6 +134,12 @@ yum install lsof
 lsof -n|awk '{print $2}'|sort|uniq -c |sort -nr|more
 
 ps -ef|grep 进程号 
+
+#回程traceroute
+wget https://cdn.ipip.net/17mon/besttrace4linux.zip
+unzip besttrace4linux.zip
+chmod +x besttrace
+./besttrace -q 1 IP（你要测试的对方IP地址）
 
 
 
