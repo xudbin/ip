@@ -8,7 +8,8 @@ yum install -y nodejs
 yum install -y gcc-c++ make
 
 
-
+yum -y install docker
+service docker start
 
 wget -qO- https://raw.githubusercontent.com/Jigsaw-Code/outline-server/master/src/server_manager/install_scripts/install_server.sh | bash
 
