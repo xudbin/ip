@@ -1,3 +1,9 @@
+进入ss-local目录
+cd /Applications/ShadowsocksX-NG.app/Contents/Resources
+添加执行权限
+chmod +x ss-local
+重启
+
 安装pip 
 sudo easy_install pip 
 
