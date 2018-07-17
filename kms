@@ -1,0 +1,21 @@
+# 
+
+
+Windows
+
+ipcd /d "%SystemRoot%\system32"
+slmgr /skms 你的VPS的IP或者绑定的域名
+slmgr /ato
+slmgr /xpr
+
+
+office
+
+cd /d "%ProgramFiles(x86)%\Microsoft Office\Office15"
+
+cd /d "%ProgramFiles%\Microsoft Office\Office15"
+
+cscript ospp.vbs /sethst:你的VPS的IP或者绑定的域名
+cscript ospp.vbs /act
+cscript ospp.vbs /dstatus
+
