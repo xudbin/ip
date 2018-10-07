@@ -1,0 +1,12 @@
+document.getElementById('user_name').value="CUAdmin"
+ function submitFrm()
+        {
+            with(document.forms[0])
+            {
+                if ( password.value.length == 0 ) {
+                    alert('密码不得为空!');
+                    return;
+                }
+            }
+            document.getElementById('loginfrm').submit();
+        }
