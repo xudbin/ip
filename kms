@@ -25,3 +25,16 @@ slmgr.vbs /upk
 slmgr /ipk W269N-WFGWX-YVC9B-4J6C9-T83GX
 slmgr /skms zh.us.to
 slmgr /ato
+================================================================
+首先你的OFFICE必须是VOL版本，否则无法激活。
+找到你的office安装目录，比如C:\Program Files (x86)\Microsoft Office\Office16
+
+64位的就是C:\Program Files\Microsoft Office\Office16
+
+office16是office2016，office15就是2013，office14就是2010.
+
+cd "C:\Program Files (x86)\Microsoft Office\Office16"
+cscript ospp.vbs /sethst:kms.03k.org
+cscript ospp.vbs /act
+
+https://03k.org/kms.html
