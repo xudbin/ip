@@ -34,6 +34,8 @@ slmgr /ato
 office16是office2016，office15就是2013，office14就是2010.
 
 cd "C:\Program Files (x86)\Microsoft Office\Office16"
+
+cscript ospp.vbs /inpkey:NMMKJ-6RK4F-KMJVX-8D9MJ-6MWKP
 cscript ospp.vbs /sethst:kms.03k.org
 cscript ospp.vbs /act
 
